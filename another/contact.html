@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+    <ul id="menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/portfolio.html">Portfolio</a></li>
+        <li><a href="/aboutus.html">About us</a></li>
+        <li><a href="/another/contact.html#contact">Contact</a></li>
+    </ul>
+</header>
+
+<div class="background-slider" style="background-image: url('/images/programmer.jpg');"></div>
+
+
+<div class="slider-text">
+    <p>Contact Form</p>
+</div>
+
+<div class="row">
+<div class="col-2"></div>
+<div class="col-8">
+    <form id="contact" action="process.php" method="post">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" aria-describedby="First Name">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" aria-describedby="Last Name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select class="form-control" id="country">
+                <option value="mk">Macedonia</option>
+                <option value="us">USA</option>
+                <option value="rs">Serbia</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="col-2"></div>
+</div>
+
+<div style="margin-top: 100px"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+<script>
+    class User {
+        firstName;
+        lastName;
+        email;
+        country;
+
+        constructor(firstName, lastName, email, country) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.country = country;
+        }
+
+        fullName()
+        {
+            return `${this.firstName} ${this.lastName}`;
+        }
+
+        checkCountry()
+        {
+            if(this.country === "mk")
+            {
+                this.country = "Macedonia";
+            } else if(this.country === "rs") {
+                this.country = "Serbia";
+            } else if(this.country === "us") {
+                this.country  = "USA";
+            } else {
+                this.country = "Unknown";
+            }
+
+        }
+    }
+
+
+    let contactForm = document.getElementById("contact");
+
+    contactForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let email = document.getElementById("email").value;
+        let country = document.getElementById("country").value;
+
+        let user = new User(firstName, lastName, email, country);
+
+        let newUser = {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            email: document.getElementById("email").value,
+            country: document.getElementById("country").value
+        }
+
+        console.log(JSON.stringify(newUser));
+
+        console.log(user.fullName());
+
+        user.checkCountry()
+
+        console.log(user);
+
+    });
+
+
+</script>
+</body>
+</html>
